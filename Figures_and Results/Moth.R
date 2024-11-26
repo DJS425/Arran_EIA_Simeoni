@@ -2,8 +2,8 @@
 library(ggplot2)
 
 
-#Grouped bar plot for Hillside Invertebrates 
-ggplot(data=InvertHillData, aes(x=Taxa.Order, y=Abundance, fill=Slope)) +
+#Grouped bar plot for Moth Hillside Invertebrates 
+ggplot(data=MothData, aes(x=Taxa.Order, y=Abundance, fill=Slope)) +
   geom_bar(stat="identity", position = "dodge", col="black") +
   labs(x="Taxon (Order)", y="Abundance") +
   scale_fill_manual(values=c("lightblue", "orange")) +
@@ -19,14 +19,14 @@ ggplot(data=InvertHillData, aes(x=Taxa.Order, y=Abundance, fill=Slope)) +
 
 #Shannon-Weiner Diversity Index Calculations for Invertebrates in Slope A and B
 
-#Slope A 
+#Slope A for the moth traps
 Slope_A <- 
   data.frame(
-  Species = c("Hemiptera", "Diptera", "Hymenoptera", "Ixodida", "Araneae", "Dermaptera"),
-  Abundance = c(13, 7, 54, 20, 4, 1)  
-) #values extracted from the InvertHillData data frame 
+    Species = c("Hemiptera", "Lepidoptera", "Diptera", "Trichoptera", "Araneae"),
+    Abundance = c(5,16,8,1,1)  
+  ) #values extracted from the MothData data frame 
 
- 
+
 total_abundance <- sum(Slope_A$Abundance) #Calculates total abundance of species 
 #(in this case order) in Slope A
 
@@ -38,18 +38,18 @@ Slope_A$Proportion <- Slope_A$Abundance / total_abundance #Calculates the propor
 Slope_A$H_component <- Slope_A$Proportion * log(Slope_A$Proportion)  # pi * ln(pi), 
 #proportion * natural log of the proportion 
 
-HA <- -sum(Slope_A$H_component, na.rm = TRUE)  # Sums each negative component and 
+HAM <- -sum(Slope_A$H_component, na.rm = TRUE)  # Sums each negative component and 
 #then makes the output positive 
 
-HA # Slope A Index value 
+HAM # Slope A Index value 
 
 #######################################################################################
 
-#Slope B
+#Slope B for the moth traps
 Slope_B <- data.frame(
-  Species = c("Ixodida", "Araneae", "Diptera", "Hemiptera", "Hymenoptera", "Lepidoptera", "Siphonaptera", "Trombidiformes", "Opiliones"),
-  Abundance = c(78, 49, 18, 40, 3, 5, 3, 1, 1)  
-) #values extracted from the InvertHillData data frame 
+  Species = c("Lepidoptera", "Diptera", "Hymenoptera"),
+  Abundance = c(4,3,1)  
+) #values extracted from the MothData data frame 
 
 
 total_abundance <- sum(Slope_B$Abundance) #Calculates total abundance of species 
@@ -63,8 +63,7 @@ Slope_B$Proportion <- Slope_B$Abundance / total_abundance #Calculates the propor
 Slope_B$H_component <- Slope_B$Proportion * log(Slope_B$Proportion) # pi * ln(pi), 
 #proportion * natural log of the proportion 
 
-HB <- -sum(Slope_B$H_component, na.rm = TRUE) # Sums each negative component and 
+HBM <- -sum(Slope_B$H_component, na.rm = TRUE) # Sums each negative component and 
 #then makes the output positive 
 
-HB #Slope B Index Value 
-
+HBM #Slope B Index Value 
