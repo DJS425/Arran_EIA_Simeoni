@@ -75,3 +75,6 @@ HBS <- -sum(Stream_B$H_component, na.rm = TRUE)  # Sums each negative component 
 #then makes the output positive 
 
 HBS # Stream A Index value 
+
+
+
